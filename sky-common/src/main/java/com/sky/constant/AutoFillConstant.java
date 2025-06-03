@@ -1,7 +1,7 @@
 package com.sky.constant;
 
 /**
- * 公共字段自动填充相关常量
+ * 公共字段自動填充相關常量
  */
 public class AutoFillConstant {
     /**

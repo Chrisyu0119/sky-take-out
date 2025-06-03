@@ -5,15 +5,15 @@ import lombok.Data;
 import java.io.Serializable;
 
 /**
- * 后端统一返回结果
+ * 後端統一回傳結果
  * @param <T>
  */
 @Data
 public class Result<T> implements Serializable {
 
-    private Integer code; //编码：1成功，0和其它数字为失败
-    private String msg; //错误信息
-    private T data; //数据
+    private Integer code; //編碼：1成功，0和其它數字為失敗
+    private String msg; //錯誤資訊
+    private T data; //資料
 
     public static <T> Result<T> success() {
         Result<T> result = new Result<T>();

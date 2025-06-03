@@ -10,29 +10,29 @@ import java.util.Map;
 
 public class JwtUtil {
     /**
-     * 生成jwt
-     * 使用Hs256算法, 私匙使用固定秘钥
+     * 產生jwt
+     * 使用Hs256演算法, 私鑰使用固定金鑰
      *
-     * @param secretKey jwt秘钥
-     * @param ttlMillis jwt过期时间(毫秒)
-     * @param claims    设置的信息
+     * @param secretKey jwt金鑰
+     * @param ttlMillis jwt過期時間(毫秒)
+     * @param claims    設定的資訊
      * @return
      */
     public static String createJWT(String secretKey, long ttlMillis, Map<String, Object> claims) {
-        // 指定签名的时候使用的签名算法，也就是header那部分
+        // 指定簽章的時候使用的簽章演算法，也就是header那部分
         SignatureAlgorithm signatureAlgorithm = SignatureAlgorithm.HS256;
 
-        // 生成JWT的时间
+        // 產生JWT的時間
         long expMillis = System.currentTimeMillis() + ttlMillis;
         Date exp = new Date(expMillis);
 
-        // 设置jwt的body
+        // 設定jwt的body
         JwtBuilder builder = Jwts.builder()
-                // 如果有私有声明，一定要先设置这个自己创建的私有的声明，这个是给builder的claim赋值，一旦写在标准的声明赋值之后，就是覆盖了那些标准的声明的
+                // 如果有私有宣告，一定要先設定這個自己建立的私有的宣告，這個是給builder的claim賦值，一旦寫在標準的宣告賦值之後，就是覆蓋了那些標準的宣告的
                 .setClaims(claims)
-                // 设置签名使用的签名算法和签名使用的秘钥
+                // 設定簽章使用的簽章演算法和簽章使用的金鑰
                 .signWith(signatureAlgorithm, secretKey.getBytes(StandardCharsets.UTF_8))
-                // 设置过期时间
+                // 設定過期時間
                 .setExpiration(exp);
 
         return builder.compact();
@@ -41,16 +41,16 @@ public class JwtUtil {
     /**
      * Token解密
      *
-     * @param secretKey jwt秘钥 此秘钥一定要保留好在服务端, 不能暴露出去, 否则sign就可以被伪造, 如果对接多个客户端建议改造成多个
-     * @param token     加密后的token
+     * @param secretKey jwt金鑰 此金鑰一定要保留好在伺服器端, 不能暴露出去, 否則sign就可以被偽造, 如果對接多個客戶端建議改造成多個
+     * @param token     加密後的token
      * @return
      */
     public static Claims parseJWT(String secretKey, String token) {
         // 得到DefaultJwtParser
         Claims claims = Jwts.parser()
-                // 设置签名的秘钥
+                // 設定簽章的金鑰
                 .setSigningKey(secretKey.getBytes(StandardCharsets.UTF_8))
-                // 设置需要解析的jwt
+                // 設定需要解析的jwt
                 .parseClaimsJws(token).getBody();
         return claims;
     }
