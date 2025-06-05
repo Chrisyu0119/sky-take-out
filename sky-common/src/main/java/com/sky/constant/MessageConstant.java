@@ -8,6 +8,7 @@ public class MessageConstant {
     public static final String PASSWORD_ERROR = "密碼錯誤";
     public static final String ACCOUNT_NOT_FOUND = "帳號不存在";
     public static final String ACCOUNT_LOCKED = "帳號被鎖定";
+    public static final String AlREADY_EXISTS = "已存在";
     public static final String UNKNOWN_ERROR = "未知錯誤";
     public static final String USER_NOT_LOGIN = "使用者未登入";
     public static final String CATEGORY_BE_RELATED_BY_SETMEAL = "目前分類關聯了套餐，不能刪除";
