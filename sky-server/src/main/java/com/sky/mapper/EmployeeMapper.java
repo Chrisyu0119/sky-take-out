@@ -33,4 +33,10 @@ public interface EmployeeMapper {
      * @return
      */
     Page<Employee> pageQuery(EmployeePageQueryDTO employeePageQueryDTO);
+
+    /**
+     * 根據主鍵動態修改屬性(啟用禁用員工帳號
+     * @param employee
+     */
+    void update(Employee employee);
 }
