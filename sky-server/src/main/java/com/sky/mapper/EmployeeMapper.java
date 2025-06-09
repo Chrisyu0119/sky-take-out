@@ -39,4 +39,12 @@ public interface EmployeeMapper {
      * @param employee
      */
     void update(Employee employee);
+
+    /**
+     * 根據id查詢員工訊息
+     * @param id
+     * @return
+     */
+    @Select("select * FROM sky_take_out.employee where id = #{id}")
+    Employee getById(Long id);
 }
