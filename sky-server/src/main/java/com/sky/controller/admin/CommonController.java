@@ -5,6 +5,7 @@ import com.sky.result.Result;
 import com.sky.utils.AliOssUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiModelProperty;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -33,7 +34,7 @@ public class CommonController {
      * @return
      */
     @PostMapping("/upload")
-    @ApiModelProperty("文件上傳")
+    @ApiOperation("文件上傳")
     public Result<String> upLoad(MultipartFile file) {
         log.info("文件上傳:{}",file);
         try {
