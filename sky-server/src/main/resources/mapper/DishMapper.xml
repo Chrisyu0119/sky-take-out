@@ -29,6 +29,21 @@
         </where>
         order by d.create_time desc
     </select>
+    <select id="list" resultType="com.sky.entity.Dish">
+        SELECT * FROM sky_take_out.dish
+        <where>
+            <if test="name != null and name != ''">
+                AND name LIKE CONCAT('%', #{name}, '%')
+            </if>
+            <if test="categoryId != null">
+                AND category_id = #{categoryId}
+            </if>
+            <if test="status != null">
+                AND status = #{status}
+            </if>
+        </where>
+        ORDER BY create_time DESC
+    </select>
 
     <update id="update">
         update sky_take_out.dish
