@@ -23,26 +23,40 @@ public class ShoppingCartController {
 
     /**
      * 添加購物車
+     *
      * @param shoppingCartDTO
      * @return
      */
     @PostMapping("/add")
     @ApiOperation("添加購物車")
     public Result add(@RequestBody ShoppingCartDTO shoppingCartDTO) {
-        log.info("添加購物車,商品信息為: {}",shoppingCartDTO);
+        log.info("添加購物車,商品信息為: {}", shoppingCartDTO);
         shoppingCartService.addShoppingCart(shoppingCartDTO);
         return Result.success();
     }
 
     /**
      * 查詢購物車
+     *
      * @return
      */
     @GetMapping("/list")
     @ApiOperation("查詢購物車")
-    public Result<List<ShoppingCart>> list(){
+    public Result<List<ShoppingCart>> list() {
 //        log.info("添加購物車,商品信息為: {}",shoppingcart);
         List<ShoppingCart> list = shoppingCartService.showShoppingCart();
         return Result.success(list);
     }
+
+    /**
+     * 清空購物車
+     * @return
+     */
+    @DeleteMapping("/clean")
+    @ApiOperation("清空購物車")
+    public Result<List<ShoppingCart>> clean() {
+        shoppingCartService.cleanShoppingCart();
+        return Result.success();
+    }
 }
+
