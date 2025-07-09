@@ -1,9 +1,12 @@
 package com.sky.mapper;
 
+import com.github.pagehelper.Page;
+import com.sky.dto.OrdersPageQueryDTO;
 import com.sky.entity.Orders;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Mapper
@@ -28,4 +31,35 @@ public interface OrderMapper {
      * @param orders
      */
     void update(Orders orders);
+
+    /**
+     * 分頁查詢並按下單時間排序
+     * @param ordersPageQueryDTO
+     */
+    Page<Orders> pageQuery(OrdersPageQueryDTO ordersPageQueryDTO);
+
+    /**
+     * 根據id查詢訂單
+     * @param id
+     * @return
+     */
+    @Select("select * from sky_take_out.orders where id=#{id}")
+    Orders getById(Long id);
+
+    /**
+     * 根據狀態統計訂單數量
+     * @param toBeConfirmed
+     * @return
+     */
+    @Select("select count(id) from sky_take_out.orders where status = #{status}")
+    Integer countStatus(Integer toBeConfirmed);
+
+    /**
+     * 根據訂單狀態和下單時間查詢訂單
+     * @param status
+     * @param orderTime
+     * @return
+     */
+    @Select("select * from sky_take_out.orders where status = #{status} and order_time < #{orderTime}")
+    List<Orders> getByStatusAndOrderTimeLT(Integer status, LocalDateTime orderTime);
 }

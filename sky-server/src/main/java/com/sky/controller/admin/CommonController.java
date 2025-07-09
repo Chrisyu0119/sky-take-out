@@ -51,6 +51,6 @@ public class CommonController {
             log.error("文件上傳失敗: {}", e);
         }
 
-        return Result.error(MessageConstant.UPLOAD_FAILED);
+        return null;
     }
 }
