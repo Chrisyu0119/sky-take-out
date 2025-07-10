@@ -498,5 +498,25 @@ public class OrderServiceImpl implements OrderService {
 
         orderMapper.update(orders);
     }
+
+    /**
+     * 客戶催單
+     *
+     * @param id
+     */
+    @Override
+    public void reminder(Long id) {
+        Orders ordersDB = orderMapper.getById(id);
+        // 校驗訂單是否存在
+        if (ordersDB == null) {
+            throw new OrderBusinessException(MessageConstant.ORDER_STATUS_ERROR);
+        }
+        Map map = new HashMap<>();
+        map.put("type",2);//1表示來單提醒 2代表客戶催單
+        map.put("orderId",id);
+        map.put("content","訂單號碼"+ordersDB.getNumber());
+        //通過WebSocket向Clint端發送消息
+        webSocketServer.sendToAllClient(JSON.toJSONString(map));
+    }
 }
 
