@@ -142,8 +142,8 @@ public class ReportServiceImpl implements ReportService {
         //遍歷dateList查詢每天的有效訂單與訂單總數
         for (LocalDate date : dateList) {
             //查詢每天訂單總數 select count(id) from orders where order_time > ? and order_time < ?
-            LocalDateTime beginTime = LocalDateTime.of(begin, LocalTime.MIN);
-            LocalDateTime endTime = LocalDateTime.of(end, LocalTime.MAX);
+            LocalDateTime beginTime = LocalDateTime.of(date, LocalTime.MIN);
+            LocalDateTime endTime = LocalDateTime.of(date, LocalTime.MAX);
             Integer orderCount = getOrderCount(beginTime, endTime, null);
             //查詢每天有效訂單數 select count(id) from orders where order_time > ? and order_time < ? and status = ?
             Integer validOrderCount = getOrderCount(beginTime, endTime, Orders.COMPLETED);
