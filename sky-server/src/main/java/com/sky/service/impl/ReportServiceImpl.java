@@ -52,8 +52,8 @@ public class ReportServiceImpl implements ReportService {
         List<Double> turnoverList = new ArrayList<>();
         for (LocalDate date : dateList) {
             //查詢date日期對應的營業額數據,營業額是指: 狀態為"已完成"的訂單金額合計
-            LocalDateTime beginTime = LocalDateTime.of(begin, LocalTime.MIN);
-            LocalDateTime endTime = LocalDateTime.of(end, LocalTime.MAX);
+            LocalDateTime beginTime = LocalDateTime.of(date, LocalTime.MIN);
+            LocalDateTime endTime = LocalDateTime.of(date, LocalTime.MAX);
             //select sum(amount) from orders where order_time > beginTime and order_time< endTime and status = 5
             Map map = new HashMap();
             map.put("begin", beginTime);
@@ -95,8 +95,8 @@ public class ReportServiceImpl implements ReportService {
         //存放每天用戶總量     select count(id) from where create_time < ?
         List<Integer> totalUserList = new ArrayList<>();
         for (LocalDate date : dateList) {
-            LocalDateTime beginTime = LocalDateTime.of(begin, LocalTime.MIN);
-            LocalDateTime endTime = LocalDateTime.of(end, LocalTime.MAX);
+            LocalDateTime beginTime = LocalDateTime.of(date, LocalTime.MIN);
+            LocalDateTime endTime = LocalDateTime.of(date, LocalTime.MAX);
             Map map = new HashMap();
             map.put("end", endTime);
             //總用戶數量
